@@ -75,7 +75,7 @@ class EnterprisePayrollService implements PayrollServiceInterface
 
         // 4. Kasbon (Cash Advance) Deduction
         $kasbonRecords = \App\Models\CashAdvance::where('user_id', $user->id)
-            ->where('status', 'approved')
+            ->whereIn('status', ['approved', 'paid'])
             ->where('payment_month', $month)
             ->where('payment_year', $year)
             ->get();
