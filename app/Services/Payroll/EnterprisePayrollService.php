@@ -83,14 +83,17 @@ class EnterprisePayrollService implements PayrollServiceInterface
         $totalKasbon = $kasbonRecords->sum('amount');
 
         if ($totalKasbon > 0) {
-            $deductions['Kasbon'] = $totalKasbon;
+            foreach ($kasbonRecords as $kasbon) {
+                $label = 'Kasbon (' . $kasbon->created_at->format('d M Y') . ')';
+                $deductions[$label] = $kasbon->amount;
+                $details[$label] = [
+                    'type' => 'deduction',
+                    'calc' => 'kasbon',
+                    'amount' => $kasbon->amount,
+                    'purpose' => $kasbon->purpose,
+                ];
+            }
             $totalDeduction += $totalKasbon;
-            $details['Kasbon'] = [
-                'type' => 'deduction',
-                'calc' => 'kasbon',
-                'amount' => $totalKasbon,
-                'count' => $kasbonRecords->count()
-            ];
         }
 
         // 5. Net Salary
