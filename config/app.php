@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'PasPapan'),
+    'name' => env('APP_NAME', 'Abon Elite'),
 
     /*
     |--------------------------------------------------------------------------
@@ -97,7 +97,7 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    'key' => env('APP_KEY'),
+    'key' => env('base64:MnKjiMGvVmtHqlP1Afub8JBvjgE5TTWZtLf0fVlf42c='),
 
     'previous_keys' => [
         ...array_filter(
